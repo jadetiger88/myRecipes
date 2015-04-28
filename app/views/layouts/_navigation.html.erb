@@ -3,21 +3,56 @@
   <div class="container">
     
       <%= link_to "myRecipes", root_path, class: "btn btn-lg btn-success", id: "logo" %>
+
+          <ul class="nav_ul_item">
+              <li class="dropdown">
+                <%= link_to '#', class: "btn btn-default btn-success dropdown-toggle", "data-toggle" => "dropdown" do %>
+                  Styles <b class="caret"></b>
+                <% end %>
+                
+                <ul class='dropdown-menu'>
+                  <% Style.all.each do |s| %>
+                    <li><%= link_to s.name, style_path(s) %></li>
+                  <% end %>
+                  <% if logged_in? %>
+                  <li class='divider'></li>
+                  <li>
+                    <%= link_to(new_style_path) do %>
+                      new style<% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              </li>
+          </ul>
       
-      <div class="nav_item">
-          <%= link_to "link 1", "", class: "btn btn-default btn-warning" %>
-      </div>
+          <ul class="nav_ul_item">
+              <li class="dropdown">
+                <%= link_to '#', class: "btn btn-default btn-success dropdown-toggle", "data-toggle" => "dropdown" do %>
+                  Ingredents <b class="caret"></b>
+                <% end %>
+                
+                <ul class='dropdown-menu'>
+                  <% Ingredient.all.each do |i| %>
+                    <li><%= link_to i.name, ingredient_path(i) %></li>
+                  <% end %>
+                  <% if logged_in? %>
+                  <li class='divider'></li>
+                  <li>
+                    <%= link_to(new_ingredient_path) do %>
+                      new ingredient<% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              </li>
+          </ul>
       
-      <div class="nav_item">
-          <%= link_to "link 2", "", class: "btn btn-default btn-warning" %>
-      </div>
       
       <% if logged_in? %> 
-          <div class="nav_item">
+          <div class="nav_ul_item">
               <%= link_to "New Recipe", new_recipe_path, class: "btn btn-default btn-warning" %>
           </div>
           
-          <div class="nav_item">
+          <div class="nav_ul_item">
               <li class="dropdown">
                 <%= link_to '#', class: "btn btn-default btn-success dropdown-toggle", "data-toggle" => "dropdown" do %>
                   <%= current_user.chef_name %> <b class="caret"></b>
